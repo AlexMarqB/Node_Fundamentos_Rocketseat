@@ -1,0 +1,6 @@
+Comandos
+
+Criar o package.json = npm init -y
+
+Para o Node entender o novo metódo de import por ESModule (import/export)
+precisamos adicionar no package.json a propriedade "type":"module"
