@@ -5,6 +5,7 @@
 //Import por ESModule import/export
 
 import http from 'node:http';
+import { json } from './middlewares/json.js';
 //ex: import fastify from 'fastify'
 
 //ROTAS - meios de entrada para o consumidor da API chamar as funcionalidades do nosso app
@@ -30,27 +31,12 @@ const server = http.createServer(async (request, response) => {
     // Devolver uma resposta enviamos o response
     const {method, url} = request;
 
-    const buffers = []
-
-    //Espera por cada pedaço da requisição e acumula no array
-    for await (const chunk of request) {
-        buffers.push(chunk)
-    }
-   
-    //tenta converter os buffers no body em forma de JSON
-    try {
-        request.body = JSON.parse(Buffer.concat(buffers).toString()) //transforma o buffer em um objeto entendivel pelo js
-
-        console.log(request.body)
-    } catch {
-        request.body = null
-    }
-
+    //Middlewares -> Interceptador
+    //Interceptador -> Intercepta a requisição e fazem algum tratamento ou validação
+    await json(request, response)
 
     if(method ===  'GET' && url === '/users') {
-        return response
-        .setHeader('Content-type', 'application/json') 
-        .end(JSON.stringify(users)) // retorna um array vazio sempre que reiniciamos a aplicação
+        return response.end(JSON.stringify(users)) // retorna um array vazio sempre que reiniciamos a aplicação
     }
 
     if(method ===  'POST' && url === '/users') {
