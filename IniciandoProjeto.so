@@ -16,3 +16,13 @@ dentro do package.json podemos criar "atalho" de scripts
   },
 
 Agora só precisamos rodar "npm run dev" que o servidor será iniciado e irá atualizar automaticamente porque colocamos o --watch
+
+//Requisição HTTP
+Método HTTP
+URL
+Conseguimos ambos através da request recebida
+Por exemplo se consultarmos a API agora apenas pela URL base iremos ter o retorno de
+
+GET /
+
+Método: GET; URL: /
