@@ -26,3 +26,11 @@ Por exemplo se consultarmos a API agora apenas pela URL base iremos ter o retorn
 GET /
 
 Método: GET; URL: /
+
+Salvar dados em memoria:
+
+Stateful  - Stateless
+Stateful => Salva e depende de informações em memoria para funcionamento até que seja desligada, e caso reiniciada pode ser executada de forma diferente
+Stateless => Não salva em memoria apenas em dispositivos externos (BD) o funcionamento sempre sera igual mesmo se reiniciada
+
+//Cabeçalhos (Req/Res) => Metadados - informações adicionais sobre como o dado enviado pelo back para o front deve ser interpretado

@@ -20,16 +20,29 @@ import http from 'node:http';
 // Get /users => Busca um user
 // Post /users => Criando um user
 
+//Salvar em memoria
+
+const users = [];
+//Array não pode ser enviado para o front, então iremos converter para JSON - JavaScript Object Notation
+
 const server = http.createServer((request, response) => {
     // Criar um usuário (nome, email, senha) => o request possui todas essas informações
     // Devolver uma resposta enviamos o response
-    const {method, url} = req;
+    const {method, url} = request;
 
     if(method ===  'GET' && url === '/users') {
-        return response.end('Listagem de usuários')
+        return response
+        .setHeader('Content-type', 'application/json') 
+        .end(JSON.stringify(users)) // retorna um array vazio sempre que reiniciamos a aplicação
     }
 
     if(method ===  'POST' && url === '/users') {
+        users.push({
+            id: 1,
+            name: "John Doe",
+            email: "johndoe@example.com"
+        })
+
         return response.end('Criação de usuários')
     }
 
