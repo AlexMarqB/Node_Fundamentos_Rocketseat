@@ -43,10 +43,14 @@ const server = http.createServer((request, response) => {
             email: "johndoe@example.com"
         })
 
-        return response.end('Criação de usuários')
+        //Status code: 201 - Sucesso - Created
+        return response.writeHead(201).end() 
+        // Quando criamos algo não precisamos retornar nenhuma informação apenas o status de sucesso ou erro já é suficiente
     }
 
-    return response.end("Hello world")
+    //Status code: 404 - Erro - Not found
+    return response.writeHead(404).end() 
+    //Rota de "escape" ou seja quando nenhuma rota acima foi encontrada cai aqui
 })
 
 //rota do server: localhost:3333

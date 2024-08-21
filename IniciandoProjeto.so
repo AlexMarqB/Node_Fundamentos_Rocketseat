@@ -34,3 +34,5 @@ Stateful => Salva e depende de informações em memoria para funcionamento até 
 Stateless => Não salva em memoria apenas em dispositivos externos (BD) o funcionamento sempre sera igual mesmo se reiniciada
 
 //Cabeçalhos (Req/Res) => Metadados - informações adicionais sobre como o dado enviado pelo back para o front deve ser interpretado
+
+//HTTP Status Code -> códigos numericos para informar sobre a requisição se deu erro, qual erro, erro conhecido ou inesperado, deu tudo certo, não encontrou
