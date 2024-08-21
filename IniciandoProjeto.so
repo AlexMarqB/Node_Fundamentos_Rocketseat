@@ -4,3 +4,15 @@ Criar o package.json = npm init -y
 
 Para o Node entender o novo metódo de import por ESModule (import/export)
 precisamos adicionar no package.json a propriedade "type":"module"
+
+O Node não atualiza o servidor em tempo real, ou seja se fizermos alguma alteração precisamos manualmente reiniciar o server
+Porem se adicionarmos --watch no comando de execução ele irá ter essa funcionalidade
+
+Porém para não escrevermos toda vez o código de execução no terminal 
+dentro do package.json podemos criar "atalho" de scripts
+
+"scripts": {
+    "dev": "node --watch src/server.js"
+  },
+
+Agora só precisamos rodar "npm run dev" que o servidor será iniciado e irá atualizar automaticamente porque colocamos o --watch

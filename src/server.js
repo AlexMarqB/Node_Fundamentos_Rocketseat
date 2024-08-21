@@ -14,6 +14,6 @@ const server = http.createServer((request, response) => {
 })
 
 //rota do server: localhost:3333
-// node src/server.js
+// node src/server.js | node --watch src/server.js
 server.listen(3333)
 console.log("Server up and running!")
