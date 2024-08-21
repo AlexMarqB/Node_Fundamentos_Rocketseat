@@ -25,10 +25,27 @@ import http from 'node:http';
 const users = [];
 //Array não pode ser enviado para o front, então iremos converter para JSON - JavaScript Object Notation
 
-const server = http.createServer((request, response) => {
+const server = http.createServer(async (request, response) => {
     // Criar um usuário (nome, email, senha) => o request possui todas essas informações
     // Devolver uma resposta enviamos o response
     const {method, url} = request;
+
+    const buffers = []
+
+    //Espera por cada pedaço da requisição e acumula no array
+    for await (const chunk of request) {
+        buffers.push(chunk)
+    }
+   
+    //tenta converter os buffers no body em forma de JSON
+    try {
+        request.body = JSON.parse(Buffer.concat(buffers).toString()) //transforma o buffer em um objeto entendivel pelo js
+
+        console.log(request.body)
+    } catch {
+        request.body = null
+    }
+
 
     if(method ===  'GET' && url === '/users') {
         return response
@@ -37,10 +54,12 @@ const server = http.createServer((request, response) => {
     }
 
     if(method ===  'POST' && url === '/users') {
+        const {name, email} = request.body
+
         users.push({
             id: 1,
-            name: "John Doe",
-            email: "johndoe@example.com"
+            name,
+            email
         })
 
         //Status code: 201 - Sucesso - Created
