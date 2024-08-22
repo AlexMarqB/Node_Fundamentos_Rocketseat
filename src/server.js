@@ -7,6 +7,7 @@
 import http from 'node:http';
 import { json } from './middlewares/json.js';
 import { Database } from './database.js';
+import { randomUUID } from 'node:crypto' // UUID => Unique Universal ID
 //ex: import fastify from 'fastify'
 
 //ROTAS - meios de entrada para o consumidor da API chamar as funcionalidades do nosso app
@@ -46,7 +47,7 @@ const server = http.createServer(async (request, response) => {
         const {name, email} = request.body
 
         const user = {
-            id: 1,
+            id: randomUUID(),
             name,
             email
         }
