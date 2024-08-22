@@ -24,7 +24,18 @@ import { routes } from './routes.js';
 // Get /users => Busca um user
 // Post /users => Criando um user
 
+// Formas do front/outro app enviar dados para nossa aplicação
+// Query Parameters: Parametros nomeados enviados na rota ex: http://localhost:3333/users?userId=1 -> ?chave=valor;
+//                                                            http://localhost:3333/users?userID=1&name=Alex
+// Query parameters fornece uma url stateful ou seja dados ficam salvos na url como: FIltro, paginação, não-obrigatorios
 
+// Route Parameters: Parametros não nomeados enviados na rota ex: http://localhost:3333/users/1 -> Method URL /recurso
+// Route parameters servem para identificação de recurso por exemplo em uma rota GET ou DELETE
+ 
+// Não se deve enviar dados sensiveis nos metodos de envio a cima
+
+// Request Body: Envio de informações de um formulário, sem limites (HTTPs == mais seguro)
+// Request Body são mais seguros e melhores para enviar varias informações
 
 const server = http.createServer(async (request, response) => {
     // Criar um usuário (nome, email, senha) => o request possui todas essas informações
@@ -36,7 +47,7 @@ const server = http.createServer(async (request, response) => {
     await json(request, response)
 
     const route = routes.find(route => {
-        return route.method === method && route.path === url;
+        return route.method === method && route.path.test(url);
     })
 
     if(route) {
